@@ -46,6 +46,10 @@ class DiscordAdapter extends hubot_1.Adapter {
                 await this.sendMessage(channel, msg);
             }
         };
+        this.reply = (envelope, ...messages) => {
+            const [first, ...rest] = messages;
+            return this.send(envelope, `<@${envelope.user.id}> ${first}`, ...rest);
+        };
         this.ready = () => {
             if (this.client.user === null) {
                 throw new Error('Discord user is null after logging in');

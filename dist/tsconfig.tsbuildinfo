@@ -374,8 +374,8 @@
         "signature": "dceb79d0c15a1a02b85340b3b4af199f0f255322cd7c0ae8c5d78d73c2326b7e"
       },
       "c:/src/hubot-discord-ts/src/discordadapter.ts": {
-        "version": "c245a138c83629957033317608a1a15cd785319f30d36a1679d7e2ad6d66b16a",
-        "signature": "ae8f5a72b677c8606a23e34f87e8325b80d3b5258b4d9bca5c2a91531c462fb2"
+        "version": "a5f353ce6d671efa9750f5c7de70ddf1a78b60d18bd9e652fef67e92f8054870",
+        "signature": "9559f90a6d218d82f156944527c993a6b6ec6cd66aa9726edee6eb295164ef54"
       },
       "c:/src/hubot-discord-ts/index.ts": {
         "version": "065bd9ffe8f44df8bbd3fd6d4d75bf849fa876fd9bc0f1fac17125c3945d1fad",

@@ -7,6 +7,7 @@ export declare class DiscordAdapter extends Adapter {
     run: () => Promise<void>;
     close: () => void;
     send: (envelope: Envelope, ...messages: string[]) => Promise<void>;
+    reply: (envelope: Envelope, ...messages: string[]) => Promise<void>;
     private ready;
     private sendMessage;
     private message;

@@ -49,6 +49,11 @@ export class DiscordAdapter extends Adapter {
         }
     }
 
+    public reply = (envelope: Envelope, ...messages: string[]) => {
+        const [first, ...rest] = messages;
+        return this.send(envelope, `<@${envelope.user.id}> ${first}`, ...rest);
+    }
+
     private ready = () => {
         if (this.client.user === null) {
             throw new Error('Discord user is null after logging in');
