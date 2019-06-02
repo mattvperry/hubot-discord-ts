@@ -1,0 +1,33 @@
+{
+  "name": "hubot-discord-ts",
+  "version": "1.0.0",
+  "description": "Hubot discord adapter written in Typescript",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattvperry/hubot-discord-ts.git"
+  },
+  "keywords": [
+    "hubot",
+    "discord"
+  ],
+  "author": "Matt Perry",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mattvperry/hubot-discord-ts/issues"
+  },
+  "homepage": "https://github.com/mattvperry/hubot-discord-ts#readme",
+  "devDependencies": {
+    "@types/express": "^4.16.1",
+    "@types/scoped-http-client": "^0.11.0",
+    "@types/ws": "^6.0.1"
+  },
+  "dependencies": {
+    "discord.js": "discordjs/discord.js"
+  }
+}
