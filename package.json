@@ -1,6 +1,6 @@
 {
   "name": "hubot-discord-ts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Hubot discord adapter written in Typescript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

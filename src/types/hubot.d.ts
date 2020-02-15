@@ -47,7 +47,7 @@ declare module "hubot" {
         usersForFuzzyName(fuzzyName: string): User[];
     }
 
-    export interface Robot extends EventEmitter {
+    export interface Robot<T extends Adapter = Adapter> extends EventEmitter {
         name: string;
         adapterName: string;
         adapter: Adapter;
