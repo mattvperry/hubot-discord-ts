@@ -26,7 +26,7 @@ export default class DiscordAdapter extends Adapter {
         this.client.on('error', this.error);
         this.client.on('debug', this.robot.logger.debug.bind(this.robot.logger));
 
-        this.client.login(this.token);
+        await this.client.login(this.token);
     };
 
     public close = () => this.client.destroy();
