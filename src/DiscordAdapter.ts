@@ -6,7 +6,7 @@ const zSWC = '\u200B';
 export default class DiscordAdapter extends Adapter {
     public client!: Discord.Client;
 
-    public constructor(robot: Robot, private token: string) {
+    public constructor(robot: Robt, private token: string) {
         super(robot);
     }
 
@@ -26,7 +26,7 @@ export default class DiscordAdapter extends Adapter {
         this.client.on('error', this.error);
         this.client.on('debug', this.robot.logger.debug.bind(this.robot.logger));
 
-        await this.client.login(this.token);
+        this.client.login(this.token);
     };
 
     public close = () => this.client.destroy();
