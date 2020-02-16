@@ -6,7 +6,7 @@ const zSWC = '\u200B';
 export default class DiscordAdapter extends Adapter {
     public client!: Discord.Client;
 
-    public constructor(robot: Robt, private token: string) {
+    public constructor(robot: Robot, private token: string) {
         super(robot);
     }
 
