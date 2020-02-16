@@ -1,0 +1,22 @@
+name: Official Build and Publish
+
+on:
+  push:
+    branches:
+      - master
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 13
+    - name: Install deps
+      run: yarn --frozen-lockfile
+    - name: Publish
+      uses: mikeal/merge-release@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
