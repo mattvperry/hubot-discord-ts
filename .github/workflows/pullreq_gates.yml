@@ -1,9 +1,6 @@
 name: Run all check-in gates on Pull Requests
 
-on:
-  push:
-    branches:
-      - master
+on: [pull_request]
   
 jobs:
   build:
