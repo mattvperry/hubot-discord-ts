@@ -1,13 +1,19 @@
 {
   "name": "hubot-discord-ts",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Hubot discord adapter written in Typescript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
+    "index.ts",
+    "src/**/*",
     "dist/**/*"
   ],
-  "scripts": {},
+  "scripts": {
+    "lint": "yarn eslint . --ext .js,.ts",
+    "build": "yarn rollup -c",
+    "prepublishOnly": "yarn lint && yarn build"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mattvperry/hubot-discord-ts.git"
@@ -25,9 +31,24 @@
   "devDependencies": {
     "@types/express": "^4.16.1",
     "@types/scoped-http-client": "^0.11.0",
-    "@types/ws": "^7.2.1"
+    "@types/ws": "^7.2.1",
+    "@typescript-eslint/eslint-plugin": "^2.19.2",
+    "@typescript-eslint/parser": "^2.19.2",
+    "discord.js": "discordjs/discord.js",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^7.0.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "hubot": "^3.3.2",
+    "prettier": "^1.19.1",
+    "rollup": "^1.31.1",
+    "rollup-plugin-terser": "^5.2.0",
+    "rollup-plugin-typescript2": "^0.26.0",
+    "typescript": "^3.7.5"
   },
-  "dependencies": {
-    "discord.js": "discordjs/discord.js"
+  "peerDependencies": {
+    "discord.js": "discordjs/discord.js",
+    "hubot": "^3.3.2"
   }
 }
