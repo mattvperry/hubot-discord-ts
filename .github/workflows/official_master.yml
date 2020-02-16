@@ -16,7 +16,7 @@ jobs:
     - name: Install deps
       run: yarn --frozen-lockfile
     - name: Conventional Changelog Action
-      uses: TriPSs/conventional-changelog-action@master
+      uses: TriPSs/conventional-changelog-action@v1.3.0
       with:
         github-token: ${{ secrets.github_token }}
     - name: Publish
