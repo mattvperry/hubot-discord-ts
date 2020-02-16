@@ -1,6 +1,6 @@
 import * as Discord from 'discord.js';
 import { Adapter, Envelope, Robot } from 'hubot';
-export declare class DiscordAdapter extends Adapter {
+export default class DiscordAdapter extends Adapter {
     private token;
     client: Discord.Client;
     constructor(robot: Robot, token: string);

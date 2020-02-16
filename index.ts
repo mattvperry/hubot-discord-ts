@@ -1,5 +1,6 @@
 import { Robot } from 'hubot';
-import { DiscordAdapter } from './src/DiscordAdapter';
+
+import DiscordAdapter from './src/DiscordAdapter';
 
 export { DiscordAdapter };
 

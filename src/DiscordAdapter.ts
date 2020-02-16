@@ -3,7 +3,7 @@ import { Adapter, Envelope, Robot, TextMessage } from 'hubot';
 
 const zSWC = '\u200B';
 
-export class DiscordAdapter extends Adapter {
+export default class DiscordAdapter extends Adapter {
     public client!: Discord.Client;
 
     public constructor(robot: Robot, private token: string) {
@@ -27,11 +27,9 @@ export class DiscordAdapter extends Adapter {
         this.client.on('debug', this.robot.logger.debug.bind(this.robot.logger));
 
         await this.client.login(this.token);
-    }
+    };
 
-    public close = () => {
-        this.client.destroy();
-    }
+    public close = () => this.client.destroy();
 
     public send = async (envelope: Envelope, ...messages: string[]) => {
         if (!envelope.room) {
@@ -45,14 +43,15 @@ export class DiscordAdapter extends Adapter {
         }
 
         for (const msg of messages) {
+            // eslint-disable-next-line no-await-in-loop
             await this.sendMessage(channel, msg);
         }
-    }
+    };
 
     public reply = (envelope: Envelope, ...messages: string[]) => {
         const [first, ...rest] = messages;
         return this.send(envelope, `<@${envelope.user.id}> ${first}`, ...rest);
-    }
+    };
 
     private ready = () => {
         if (this.client.user === null) {
@@ -63,7 +62,7 @@ export class DiscordAdapter extends Adapter {
         this.robot.name = this.client.user.username;
         this.robot.logger.info(`Robot Name: ${this.robot.name}`);
         this.emit('connected');
-    }
+    };
 
     private sendMessage = async (channel: Discord.TextChannel, msg: string) => {
         try {
@@ -72,11 +71,11 @@ export class DiscordAdapter extends Adapter {
         } catch (e) {
             this.robot.logger.error(`ERROR! Message not sent: ${msg}\r\n${e}`);
         }
-    }
+    };
 
     private message = (msg: Discord.Message) => {
         // Ignore self messages
-        if (!msg.author || !this.client.user || msg.author.id === this.client.user.id) {
+        if (msg.author.id === this.client.user?.id) {
             return;
         }
 
@@ -85,18 +84,17 @@ export class DiscordAdapter extends Adapter {
 
         this.robot.logger.debug(text);
         this.robot.receive(new TextMessage(user, text, msg.id));
-    }
+    };
 
     private error = async (error: Error) => {
         this.robot.logger.error(`Discord client encounted an error:\r\n${error}`);
         this.client.destroy();
         await this.client.login(this.token);
-    }
+    };
 
     private hasPermission = (channel: Discord.TextChannel, user: Discord.GuildMemberResolvable) => {
-        const permissions = channel.permissionsFor(user);
-        return permissions !== null && permissions.has('SEND_MESSAGES');
-    }
+        return channel.permissionsFor(user)?.has('SEND_MESSAGES');
+    };
 
     private mapUser = (author: Discord.User, id: string) => {
         const user = this.robot.brain.userForId(author.id);
@@ -106,7 +104,7 @@ export class DiscordAdapter extends Adapter {
         user.discriminator = author.discriminator;
 
         return user;
-    }
+    };
 
     private formatIncomingMsg = (msg: Discord.Message) => {
         let text = msg.cleanContent;
@@ -115,5 +113,5 @@ export class DiscordAdapter extends Adapter {
         }
 
         return text;
-    }
+    };
 }
