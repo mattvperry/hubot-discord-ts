@@ -1,0 +1,21 @@
+name: Run all check-in gates on Pull Requests
+
+on:
+  push:
+    branches:
+      - master
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 13
+    - name: Install deps
+      run: yarn --frozen-lockfile
+    - name: Run linter
+      run: yarn lint
+    - name: Run build
+      run: yarn build
