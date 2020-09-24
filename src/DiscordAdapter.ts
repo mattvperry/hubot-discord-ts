@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 import * as Discord from 'discord.js';
 import { Adapter, Envelope, Robot, TextMessage } from 'hubot';
 
@@ -10,7 +13,7 @@ export default class DiscordAdapter extends Adapter {
         super(robot);
     }
 
-    public run = async () => {
+    public run = async (): Promise<void> => {
         this.client = new Discord.Client({
             fetchAllMembers: true,
             presence: {
@@ -29,9 +32,9 @@ export default class DiscordAdapter extends Adapter {
         await this.client.login(this.token);
     };
 
-    public close = () => this.client.destroy();
+    public close = (): void => this.client.destroy();
 
-    public send = async (envelope: Envelope, ...messages: string[]) => {
+    public send = async (envelope: Envelope, ...messages: string[]): Promise<void> => {
         if (!envelope.room) {
             return;
         }
@@ -48,7 +51,7 @@ export default class DiscordAdapter extends Adapter {
         }
     };
 
-    public reply = (envelope: Envelope, ...messages: string[]) => {
+    public reply = (envelope: Envelope, ...messages: string[]): Promise<void> => {
         const [first, ...rest] = messages;
         return this.send(envelope, `<@${envelope.user.id}> ${first}`, ...rest);
     };
@@ -69,6 +72,7 @@ export default class DiscordAdapter extends Adapter {
             await channel.send(zSWC + msg, { split: true });
             this.robot.logger.debug(`SUCCESS! Message sent to: ${channel.id}`);
         } catch (e) {
+            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
             this.robot.logger.error(`ERROR! Message not sent: ${msg}\r\n${e}`);
         }
     };
@@ -87,7 +91,7 @@ export default class DiscordAdapter extends Adapter {
     };
 
     private error = async (error: Error) => {
-        this.robot.logger.error(`Discord client encounted an error:\r\n${error}`);
+        this.robot.logger.error(`Discord client encounted an error:\r\n${error.message}`);
         this.client.destroy();
         await this.client.login(this.token);
     };
