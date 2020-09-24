@@ -1,4 +1,4 @@
-import { Robot } from 'hubot';
+import { Adapter, Robot } from 'hubot';
 
 import DiscordAdapter from './src/DiscordAdapter';
 
@@ -9,7 +9,7 @@ export function hasDiscordAdapter(robot: Robot): robot is Robot<DiscordAdapter> 
     return robot.adapterName === adapterName;
 }
 
-export function use(robot: Robot) {
+export function use(robot: Robot): Adapter {
     if (!process.env.HUBOT_DISCORD_TOKEN) {
         throw new Error('Environment variable named `HUBOT_DISCORD_TOKEN` required.');
     }
